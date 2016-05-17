@@ -14,15 +14,14 @@ Meteor.methods({
 			throw new Meteor.Error('Not signed in');
 			
 		}
-		else {
-			Posts.insert({
+
+		Posts.insert({
 			title: title,
 			text: text,
 			created: new Date(),
 			author: Meteor.user().emails[0].address,
 			userId: Meteor.userId
-			})
-		}
+		});
 	},
 
 	deletePost: function(postId){
