@@ -1,0 +1,29 @@
+<head>
+  <title>simple</title>
+</head>
+
+<body>
+  {{> blog}}
+</body>
+
+<template name="blog">
+<label>New Post</label>
+  <form class='addBlogPost'>
+    <input type="text" name="blogTitle" placeholder="Title" />
+    <textarea name="blogText" placeholder="Text" rows="4" cols="50">
+    </textarea>
+    <input type="submit" name="Submit">
+  </form>
+  
+  <h3>Blog Posts</h3>
+  <hr />
+  <ul>
+    {{#each postList}}
+    <p>{{author}}</p>
+    <p>{{created}}</p>
+    <p>{{title}}</p>
+    <p>{{text}}</p>
+    {{/each}}
+  </ul>
+  <hr />
+</template>
