@@ -13,8 +13,8 @@ Meteor.methods({
 			title: title,
 			text: text,
 			created: new Date(),
-			author: "Test",
-			userId: Meteor.userId
+			author: Meteor.user().emails[0].address,
+			userId: Meteor.userId()
 		})
 	},
 
