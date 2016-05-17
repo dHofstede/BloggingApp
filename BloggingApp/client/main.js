@@ -26,7 +26,7 @@ Template.blog.events({
 
   "click .delete-post": function(event){
   	//confirm delete
-  	if(confirm('Delete Post')){
+  	if(confirm('Delete Post?')){
   		Meteor.call('deletePost', this._id);
   	}
 
