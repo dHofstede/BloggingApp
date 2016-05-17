@@ -10,6 +10,25 @@ Template.blog.helpers({
   postList: function() {
   	//posts displayed with newest post on top
   	return Posts.find({},{sort: {created: -1}});
+  },
+
+//show edit and delete buttons for post owner only
+  isPostOwner: function(userId){
+  	if (Meteor.userId() == userId) {
+  		return true;
+  	}
+  	return false;
+  },
+
+  //show edit and delete buttons for post owner only
+  convertDate: function(date){
+
+  	var options = {
+	    year: "numeric", month: "short",
+	    day: "numeric", hour: "2-digit", minute: "2-digit"
+	};
+
+  	return date.toLocaleDateString("en-US", options);
   }
 });
 
@@ -18,19 +37,23 @@ Template.blog.events({
 	//grab form data
 	var title = event.target.blogTitle.value;
 	var text = event.target.blogText.value;
-
+	console.log(Meteor.userId());
 	Meteor.call('addPost', title, text);
 
 	return false;
   },
 
   "click .delete-post": function(event){
-  	//confirm delete
   	if(confirm('Delete Post?')){
   		Meteor.call('deletePost', this._id);
   	}
 
   	return false;
-  }
+  },
 
+  "click .edit-post": function(event){
+  	
+
+  	return false;
+  }
 });
