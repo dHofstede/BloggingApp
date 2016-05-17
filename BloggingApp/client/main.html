@@ -3,23 +3,27 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
-  {{> info}}
+  {{> blog}}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-</template>
-
-<template name="info">
-  <h2>Learn Meteor!</h2>
+<template name="blog">
+<label>New Post</label>
+  <form class='addBlogPost'>
+    <input type="text" name="blogTitle" placeholder="Title" />
+    <textarea name="blogText" placeholder="Text" rows="4" cols="50">
+    </textarea>
+    <input type="submit" name="Submit">
+  </form>
+  
+  <h3>Blog Posts</h3>
+  <hr />
   <ul>
-    <li><a href="https://www.meteor.com/try">Do the Tutorial</a></li>
-    <li><a href="http://guide.meteor.com">Follow the Guide</a></li>
-    <li><a href="https://docs.meteor.com">Read the Docs</a></li>
-    <li><a href="https://forums.meteor.com">Discussions</a></li>
+    {{#each postList}}
+    <p>{{author}}</p>
+    <p>{{created}}</p>
+    <p>{{title}}</p>
+    <p>{{text}}</p>
+    {{/each}}
   </ul>
+  <hr />
 </template>

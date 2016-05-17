@@ -3,20 +3,23 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
+//declare a collection to hold the blog posts
+Posts = new Mongo.Collection('posts');
+
+Template.blog.helpers({
+  postList: function() {
+  	return Posts.find();
+  }
 });
 
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-});
+Template.blog.events({
+	"submit .addBlogPost": function(event) {
+	//grab form data
+	var title = event.target.blogTitle.value;
+	var text = event.target.blogText.value;
+	//TODO: correct this
+	var user = 'Test User'
 
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
+	Meteor.call('addPost', title, text);
   },
 });
