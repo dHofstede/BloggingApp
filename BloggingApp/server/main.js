@@ -9,13 +9,20 @@ Meteor.startup(() => {
 
 Meteor.methods({
 	addPost: function(title, text){
-		Posts.insert({
+
+		//authenticate user
+		if(!Meteor.userId()){
+			throw new Meteor.Error('Not signed in');
+		}
+		else {
+			Posts.insert({
 			title: title,
 			text: text,
 			created: new Date(),
-			author: "Test",
+			author: Meteor.user().emails[0].address,
 			userId: Meteor.userId
-		})
+			})
+		}
 	},
 
 	deletePost: function(postId){

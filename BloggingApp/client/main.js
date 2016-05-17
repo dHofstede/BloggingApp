@@ -18,8 +18,6 @@ Template.blog.events({
 	//grab form data
 	var title = event.target.blogTitle.value;
 	var text = event.target.blogText.value;
-	//TODO: correct this
-	var user = 'Test User'
 
 	Meteor.call('addPost', title, text);
 
@@ -28,7 +26,7 @@ Template.blog.events({
 
   "click .delete-post": function(event){
   	//confirm delete
-  	if(confirm('Delete Post')){
+  	if(confirm('Delete Post?')){
   		Meteor.call('deletePost', this._id);
   	}
 
