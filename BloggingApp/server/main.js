@@ -16,5 +16,9 @@ Meteor.methods({
 			author: "Test",
 			userId: Meteor.userId
 		})
+	},
+
+	deletePost: function(postId){
+		Posts.remove(postId);
 	}
 });
