@@ -9,10 +9,10 @@ Meteor.startup(() => {
 
 Meteor.methods({
 	addPost: function(title, text){
-
 		//authenticate user
 		if(!Meteor.userId()){
 			throw new Meteor.Error('Not signed in');
+			
 		}
 		else {
 			Posts.insert({
