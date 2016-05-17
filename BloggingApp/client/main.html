@@ -8,7 +8,7 @@
 
 <template name="blog">
 <label>New Post</label>
-  <form class='addBlogPost'>
+  <form class='add-blog-post'>
     <input type="text" name="blogTitle" placeholder="Title" />
     <textarea name="blogText" placeholder="Text" rows="4" cols="50">
     </textarea>
@@ -16,14 +16,17 @@
   </form>
   
   <h3>Blog Posts</h3>
-  <hr />
+  
   <ul>
     {{#each postList}}
-    <p>{{author}}</p>
-    <p>{{created}}</p>
-    <p>{{title}}</p>
-    <p>{{text}}</p>
+      <hr />
+        <p>{{author}}</p>
+        <p>{{created}}</p>
+        <p>{{title}}</p>
+        <p>{{text}}</p>
+        <button class="edit-post">Edit</button>
+        <button class="delete-post">Delete</button>
     {{/each}}
   </ul>
-  <hr />
+  
 </template>

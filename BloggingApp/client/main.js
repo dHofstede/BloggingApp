@@ -8,12 +8,13 @@ Posts = new Mongo.Collection('posts');
 
 Template.blog.helpers({
   postList: function() {
-  	return Posts.find();
+  	//posts displayed with newest post on top
+  	return Posts.find({},{sort: {created: -1}});
   }
 });
 
 Template.blog.events({
-	"submit .addBlogPost": function(event) {
+	"submit .add-blog-post": function(event) {
 	//grab form data
 	var title = event.target.blogTitle.value;
 	var text = event.target.blogText.value;
@@ -21,5 +22,17 @@ Template.blog.events({
 	var user = 'Test User'
 
 	Meteor.call('addPost', title, text);
+
+	return false;
   },
+
+  "click .delete-post": function(event){
+  	//confirm delete
+  	if(confirm('Delete Post')){
+  		Meteor.call('deletePost', this._id);
+  	}
+
+  	return false;
+  }
+
 });
