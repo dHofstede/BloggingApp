@@ -23,11 +23,13 @@
     {{#each postList}}
       <hr />
         <p>{{author}}</p>
-        <p>{{created}}</p>
+        <p>{{convertDate created}}</p>
         <p>{{title}}</p>
         <p>{{text}}</p>
-        <button class="edit-post">Edit</button>
-        <button class="delete-post">Delete</button>
+        {{#if isPostOwner userId}}
+          <button class="edit-post">Edit</button>
+          <button class="delete-post">Delete</button>
+        {{/if}}
     {{/each}}
   </ul>
   

@@ -12,7 +12,6 @@ Meteor.methods({
 		//authenticate user
 		if(!Meteor.userId()){
 			throw new Meteor.Error('Not signed in');
-			
 		}
 
 		Posts.insert({
@@ -20,7 +19,7 @@ Meteor.methods({
 			text: text,
 			created: new Date(),
 			author: Meteor.user().emails[0].address,
-			userId: Meteor.userId
+			userId: Meteor.userId()
 		});
 	},
 
