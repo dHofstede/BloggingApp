@@ -79,9 +79,11 @@
   <li role="presentation"><a href="">{{> loginButtons}}</a></li>
 </ul>
   <div class="container">
-        <h4>test</h4>
-        <p>test text</p>
-        <button class="save-my-edit">Save</button>
-        <button class="cancel-my-edit">Cancel</button> 
+    <input type="text" name="edit-title" value={{editTitle}} />
+    <br />
+    <textarea name="edit-text" rows="4" cols="50">{{editText}}</textarea>
+    <br />
+    <button class="save-my-edit">Save</button>
+    <button class="cancel-my-edit">Cancel</button> 
   </div>
 </template>

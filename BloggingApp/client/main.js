@@ -5,7 +5,7 @@ import './main.html';
 
 //declare a collection to hold the blog posts
 Posts = new Mongo.Collection('posts');
-
+var editPost = new ReactiveVar;
 
 //Routes
 Router.route('/', function () {
@@ -53,9 +53,14 @@ Template.myPosts.helpers({
 });
 
 Template.editMyPost.helpers({
-  	getMyPosts: function() {
+  	editTitle: function() {
 	  	//posts displayed with newest post on top
-	  	return Posts.find({userId: Meteor.userId()},{sort: {created: -1}});
+	  	return editPost.title;
+  	},
+
+  	editText: function() {
+	  	//posts displayed with newest post on top
+	  	return editPost.text;
   	}
 });
 
@@ -98,7 +103,8 @@ Template.myPosts.events({
 
   	"click .edit-my-post": function(event) {
   		//get the post
-  		//Posts.findOne({_id: this._id}, {});
+  		editPost = Posts.findOne({_id: this._id}, {});
+
 		Router.go('editMyPost');
   		//swap out
 
