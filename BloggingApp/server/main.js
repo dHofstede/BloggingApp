@@ -24,6 +24,18 @@ Meteor.methods({
 	},
 
 	deletePost: function(postId){
-		Posts.remove(postId);
+		//server side validation
+		//get the post
+		var postUserId = Posts.findOne({_id: postId}, {}).userId;
+
+		//verify the current user is the owner
+		if (Meteor.userId() == postUserId) {
+			//and then delete
+			Posts.remove(postId);
+		}
+		else{
+			throw new Meteor.Error('Unauthorized deletion attempt');
+		}
+		
 	}
 });

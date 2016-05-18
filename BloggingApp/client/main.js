@@ -78,6 +78,22 @@ Template.addNewPost.events({
   	}
 });
 
+Template.myPosts.events({
+	"click .delete-my-post": function(event) {
+
+		if(confirm('Delete Post?')){
+  			Meteor.call('deletePost', this._id);
+  		}
+
+  		return false;
+  	},
+
+  	"click .edit-my-post": function(event) {
+
+		return false;
+  	}
+});
+
 /*
 
 "click .delete-post": function(event){
