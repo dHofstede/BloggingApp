@@ -51,4 +51,4 @@ Meteor.methods({
 			throw new Meteor.Error('Unauthorized edit attempt');
 		}
 	}
-});
+}); 
