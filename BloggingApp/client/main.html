@@ -70,3 +70,18 @@
     </ul> 
   </div>
 </template>
+
+<template name="editMyPost">
+<ul class="nav nav-pills">
+  <li role="presentation"><a href="/">Home</a></li>
+  <li role="presentation"><a href="/addNewPost">Create New Post</a></li>
+  <li role="presentation" class="active"><a href="/myPosts">My Posts</a></li>
+  <li role="presentation"><a href="">{{> loginButtons}}</a></li>
+</ul>
+  <div class="container">
+        <h4>test</h4>
+        <p>test text</p>
+        <button class="save-my-edit">Save</button>
+        <button class="cancel-my-edit">Cancel</button> 
+  </div>
+</template>

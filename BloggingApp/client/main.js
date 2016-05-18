@@ -15,6 +15,7 @@ Router.route('/', function () {
 Router.route('/blog');
 Router.route('/addNewPost');
 Router.route('/myPosts');
+Router.route('/editMyPost');
 
 //global helper methods
 //convert date to viewer friendly format
@@ -45,6 +46,13 @@ Template.blog.helpers({
 });
 
 Template.myPosts.helpers({
+  	getMyPosts: function() {
+	  	//posts displayed with newest post on top
+	  	return Posts.find({userId: Meteor.userId()},{sort: {created: -1}});
+  	}
+});
+
+Template.editMyPost.helpers({
   	getMyPosts: function() {
 	  	//posts displayed with newest post on top
 	  	return Posts.find({userId: Meteor.userId()},{sort: {created: -1}});
@@ -89,6 +97,10 @@ Template.myPosts.events({
   	},
 
   	"click .edit-my-post": function(event) {
+  		//get the post
+  		//Posts.findOne({_id: this._id}, {});
+		Router.go('editMyPost');
+  		//swap out
 
 		return false;
   	}
