@@ -39,9 +39,9 @@
   <div class="container">
     <h3>New Post</h3>
     <form class='add-blog-post'>
-      <input type="text" name="blogTitle" placeholder="Blog Title" />
+      <input type="text" name="blogTitle" placeholder="Blog Title" class="txtTitle" />
       <br />
-      <textarea name="blogText" placeholder="Blog Text" rows="4" cols="50"></textarea>
+      <textarea name="blogText" placeholder="Blog Text" rows="4" cols="50" class="txaText"></textarea>
       <br />
       <input type="submit" name="Submit">
     </form>
@@ -80,9 +80,9 @@
 </ul>
   <div class="container">
     <form class="save-my-edit">
-      <input type="text" name="editTitle" value={{editTitle}} />
+      <input type="text" name="editTitle" value={{editTitle}} class="txtTitle" />
       <br />
-      <textarea name="editText" rows="4" cols="50">{{editText}}</textarea>
+      <textarea name="editText" rows="4" cols="50" class="txaText">{{editText}}</textarea>
       <br />
       <input type="submit" name="Save">
       <button class="cancel-my-edit">Cancel</button> 
