@@ -70,3 +70,22 @@
     </ul> 
   </div>
 </template>
+
+<template name="editMyPost">
+<ul class="nav nav-pills">
+  <li role="presentation"><a href="/">Home</a></li>
+  <li role="presentation"><a href="/addNewPost">Create New Post</a></li>
+  <li role="presentation" class="active"><a href="/myPosts">My Posts</a></li>
+  <li role="presentation"><a href="">{{> loginButtons}}</a></li>
+</ul>
+  <div class="container">
+    <form class="save-my-edit">
+      <input type="text" name="editTitle" value={{editTitle}} />
+      <br />
+      <textarea name="editText" rows="4" cols="50">{{editText}}</textarea>
+      <br />
+      <input type="submit" name="Save">
+      <button class="cancel-my-edit">Cancel</button> 
+    </form>
+  </div>
+</template>
