@@ -6,6 +6,18 @@ import './main.html';
 //declare a collection to hold the blog posts
 Posts = new Mongo.Collection('posts');
 
+
+//Routes
+Router.route('/', function () {
+  this.render('blog');
+});
+
+Router.route('/addNewPost');
+
+Router.route('/myPosts');
+
+
+//helper methods
 Template.blog.helpers({
   postList: function() {
   	//posts displayed with newest post on top
@@ -20,9 +32,26 @@ Template.blog.helpers({
   	return false;
   },
 
-  //show edit and delete buttons for post owner only
+  //convert date to viewer friendly format
   convertDate: function(date){
 
+  	var options = {
+	    year: "numeric", month: "short",
+	    day: "numeric", hour: "2-digit", minute: "2-digit"
+	};
+
+  	return date.toLocaleDateString("en-US", options);
+  }
+});
+
+Template.myPosts.helpers({
+  getMyPosts: function() {
+  	//posts displayed with newest post on top
+  	return Posts.find({userId: Meteor.userId()},{sort: {created: -1}});
+  },
+
+  //convert date to viewer friendly format
+  convertDate: function(date){
   	var options = {
 	    year: "numeric", month: "short",
 	    day: "numeric", hour: "2-digit", minute: "2-digit"
