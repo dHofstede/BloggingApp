@@ -97,16 +97,33 @@ Template.myPosts.events({
 		if(confirm('Delete Post?')){
   			Meteor.call('deletePost', this._id);
   		}
-
-  		return false;
   	},
 
   	"click .edit-my-post": function(event) {
-  		//get the post
+  		//get the post and assign it to the variable
   		editPost = Posts.findOne({_id: this._id}, {});
-
+  		//go to editMyPost template
 		Router.go('editMyPost');
-  		//swap out
+  	}
+});
+
+Template.editMyPost.events({
+	"submit .save-my-edit": function(event) {
+		//collect values
+		editPost.title = event.target.editTitle.value;
+		editPost.text = event.target.editText.value;
+
+		Meteor.call('editPost', editPost);
+
+		editPost = null;
+
+  		Router.go('myPosts');
+  		
+  		return false;
+  	},
+
+  	"click .cancel-my-edit": function(event) {
+		Router.go('myPosts');
 
 		return false;
   	}

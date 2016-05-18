@@ -79,11 +79,13 @@
   <li role="presentation"><a href="">{{> loginButtons}}</a></li>
 </ul>
   <div class="container">
-    <input type="text" name="edit-title" value={{editTitle}} />
-    <br />
-    <textarea name="edit-text" rows="4" cols="50">{{editText}}</textarea>
-    <br />
-    <button class="save-my-edit">Save</button>
-    <button class="cancel-my-edit">Cancel</button> 
+    <form class="save-my-edit">
+      <input type="text" name="editTitle" value={{editTitle}} />
+      <br />
+      <textarea name="editText" rows="4" cols="50">{{editText}}</textarea>
+      <br />
+      <input type="submit" name="Save">
+      <button class="cancel-my-edit">Cancel</button> 
+    </form>
   </div>
 </template>

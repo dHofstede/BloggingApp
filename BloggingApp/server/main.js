@@ -37,5 +37,20 @@ Meteor.methods({
 			throw new Meteor.Error('Unauthorized deletion attempt');
 		}
 		
+	},
+
+	editPost: function(post){
+		//server side validation
+		//get the post
+		var postUserId = Posts.findOne({_id: post._id}, {}).userId;
+
+		//verify the current user is the owner
+		if (Meteor.userId() == postUserId) {
+			Posts.update({_id: post._id}, {$set: { title: post.title, text: post.text }});
+		}
+		else{
+			throw new Meteor.Error('Unauthorized edit attempt');
+		}
+		
 	}
 });
