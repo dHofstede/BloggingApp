@@ -12,67 +12,84 @@ Router.route('/', function () {
   this.render('blog');
 });
 
+Router.route('/blog');
 Router.route('/addNewPost');
-
 Router.route('/myPosts');
 
 
 //helper methods
 Template.blog.helpers({
-  postList: function() {
-  	//posts displayed with newest post on top
-  	return Posts.find({},{sort: {created: -1}});
-  },
+	postList: function() {
+		//posts displayed with newest post on top
+		return Posts.find({},{sort: {created: -1}});
+	},
 
-//show edit and delete buttons for post owner only
-  isPostOwner: function(userId){
-  	if (Meteor.userId() == userId) {
-  		return true;
+	//show edit and delete buttons for post owner only
+	isPostOwner: function(userId){
+	  	if (Meteor.userId() == userId) {
+	  		return true;
+	  	}
+	  	return false;
+		},
+
+	//convert date to viewer friendly format
+	convertDate: function(date){
+	  	var options = {
+		    year: "numeric", month: "short",
+		    day: "numeric", hour: "2-digit", minute: "2-digit"
+		};
+
+  		return date.toLocaleDateString("en-US", options);
   	}
-  	return false;
-  },
-
-  //convert date to viewer friendly format
-  convertDate: function(date){
-
-  	var options = {
-	    year: "numeric", month: "short",
-	    day: "numeric", hour: "2-digit", minute: "2-digit"
-	};
-
-  	return date.toLocaleDateString("en-US", options);
-  }
 });
 
 Template.myPosts.helpers({
-  getMyPosts: function() {
-  	//posts displayed with newest post on top
-  	return Posts.find({userId: Meteor.userId()},{sort: {created: -1}});
-  },
+  	getMyPosts: function() {
+	  	//posts displayed with newest post on top
+	  	return Posts.find({userId: Meteor.userId()},{sort: {created: -1}});
+  	},
 
-  //convert date to viewer friendly format
-  convertDate: function(date){
-  	var options = {
-	    year: "numeric", month: "short",
-	    day: "numeric", hour: "2-digit", minute: "2-digit"
-	};
+	//convert date to viewer friendly format
+	convertDate: function(date){
+		var options = {
+			year: "numeric", month: "short",
+			day: "numeric", hour: "2-digit", minute: "2-digit"
+		};
 
-  	return date.toLocaleDateString("en-US", options);
-  }
+		return date.toLocaleDateString("en-US", options);
+  	}
 });
 
-Template.blog.events({
+Template.addNewPost.events({
 	"submit .add-blog-post": function(event) {
-	//grab form data
-	var title = event.target.blogTitle.value;
-	var text = event.target.blogText.value;
-	console.log(Meteor.userId());
-	Meteor.call('addPost', title, text);
 
-	return false;
-  },
+		//grab form data
+		var title = event.target.blogTitle.value;
+		var text = event.target.blogText.value;
 
-  "click .delete-post": function(event){
+		//validate on client side that the user is logged in and then
+		//call server method
+		if(Meteor.userId()){
+			Meteor.call('addPost', title, text);
+
+			//reset textboxes
+			event.target.blogTitle.value = "";
+			event.target.blogText.value = "";
+
+			//redirect back to the blog page
+			Router.go('blog');
+		}
+		else{
+			//TODO: error message
+		}
+
+		return false;
+  	}
+});
+
+/*
+
+"click .delete-post": function(event){
   	if(confirm('Delete Post?')){
   		Meteor.call('deletePost', this._id);
   	}
@@ -85,4 +102,5 @@ Template.blog.events({
 
   	return false;
   }
-});
+
+*/
