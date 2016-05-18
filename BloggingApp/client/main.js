@@ -20,7 +20,7 @@ Template.blog.helpers({
   	return false;
   },
 
-  //show edit and delete buttons for post owner only
+  //convert date to viewer friendly format
   convertDate: function(date){
 
   	var options = {
