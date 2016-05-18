@@ -12,6 +12,8 @@ Router.route('/', function () {
   this.render('blog');
 });
 
+Router.route('/blog');
+
 Router.route('/addNewPost');
 
 Router.route('/myPosts');
@@ -61,18 +63,30 @@ Template.myPosts.helpers({
   }
 });
 
-Template.blog.events({
+Template.addNewPost.events({
 	"submit .add-blog-post": function(event) {
+
 	//grab form data
 	var title = event.target.blogTitle.value;
 	var text = event.target.blogText.value;
-	console.log(Meteor.userId());
+
+	//call server method
 	Meteor.call('addPost', title, text);
 
-	return false;
-  },
+	//reset textboxes
+	event.target.blogTitle.value = "";
+	event.target.blogText.value = "";
 
-  "click .delete-post": function(event){
+	//redirect back to the blog page
+	Router.go('blog');
+
+	return false;
+  }
+});
+
+/*
+
+"click .delete-post": function(event){
   	if(confirm('Delete Post?')){
   		Meteor.call('deletePost', this._id);
   	}
@@ -85,4 +99,5 @@ Template.blog.events({
 
   	return false;
   }
-});
+
+*/
