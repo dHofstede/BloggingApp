@@ -5,6 +5,8 @@ import './main.html';
 
 //declare a collection to hold the blog posts
 Posts = new Mongo.Collection('posts');
+
+//hold on to post for edit
 var editPost = new ReactiveVar;
 
 //Routes
@@ -83,9 +85,6 @@ Template.addNewPost.events({
 			//redirect back to the blog page
 			Router.go('blog');
 		}
-		else{
-			//TODO: error message
-		}
 
 		return false;
   	}
@@ -128,21 +127,3 @@ Template.editMyPost.events({
 		return false;
   	}
 });
-
-/*
-
-"click .delete-post": function(event){
-  	if(confirm('Delete Post?')){
-  		Meteor.call('deletePost', this._id);
-  	}
-
-  	return false;
-  },
-
-  "click .edit-post": function(event){
-  	
-
-  	return false;
-  }
-
-*/

@@ -36,7 +36,6 @@ Meteor.methods({
 		else{
 			throw new Meteor.Error('Unauthorized deletion attempt');
 		}
-		
 	},
 
 	editPost: function(post){
@@ -51,6 +50,5 @@ Meteor.methods({
 		else{
 			throw new Meteor.Error('Unauthorized edit attempt');
 		}
-		
 	}
 });

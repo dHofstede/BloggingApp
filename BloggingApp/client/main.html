@@ -20,10 +20,16 @@
     <ul>
       {{#each postList}}
         <hr />
-        <h4>{{author}}</h4>
-        <h4>{{glbConvertDate created}}</h4>
+        <div class="row">
+          <div class="col-md-1">
+            <h4>{{author}}</h4>
+          </div>
+          <div class="col-md-11 text-right">
+            <h4>{{glbConvertDate created}}</h4>
+          </div>
+        </div>
         <h4>{{title}}</h4>
-        <p>{{text}}</p>
+        <p class="blogtext">{{text}}</p>
       {{/each}}
     </ul>
   </div>
@@ -39,11 +45,11 @@
   <div class="container">
     <h3>New Post</h3>
     <form class='add-blog-post'>
-      <input type="text" name="blogTitle" placeholder="Blog Title" />
+      <input type="text" name="blogTitle" placeholder="Blog Title" class="txtTitle" />
       <br />
-      <textarea name="blogText" placeholder="Blog Text" rows="4" cols="50"></textarea>
+      <textarea name="blogText" placeholder="Blog Text" rows="20" cols="50" class="txaText"></textarea>
       <br />
-      <input type="submit" name="Submit">
+      <input type="submit" name="Submit" class="btn btn-primary">
     </form>
   </div>
 </template>
@@ -60,12 +66,20 @@
     <ul>
       {{#each getMyPosts}}
         <hr />
-        <h4>{{author}}</h4>
-        <h4>{{glbConvertDate created}}</h4>
+
+
+        <div class="row">
+          <div class="col-md-1">
+            <h4>{{author}}</h4>
+          </div>
+          <div class="col-md-11 text-right">
+            <h4>{{glbConvertDate created}}</h4>
+          </div>
+        </div>
         <h4>{{title}}</h4>
-        <p>{{text}}</p>
-        <button class="edit-my-post">Edit</button>
-        <button class="delete-my-post">Delete</button> 
+        <p class="blogtext">{{text}}</p>
+        <button class="edit-my-post btn btn-primary">Edit</button>
+        <button class="delete-my-post btn btn-primary">Delete</button> 
       {{/each}}
     </ul> 
   </div>
@@ -80,12 +94,12 @@
 </ul>
   <div class="container">
     <form class="save-my-edit">
-      <input type="text" name="editTitle" value={{editTitle}} />
+      <input type="text" name="editTitle" value={{editTitle}} class="txtTitle" />
       <br />
-      <textarea name="editText" rows="4" cols="50">{{editText}}</textarea>
+      <textarea name="editText" rows="20" cols="50" class="txaText">{{editText}}</textarea>
       <br />
-      <input type="submit" name="Save">
-      <button class="cancel-my-edit">Cancel</button> 
+      <input type="submit" name="Save" class="btn btn-primary">
+      <button class="cancel-my-edit btn btn-primary">Cancel</button> 
     </form>
   </div>
 </template>
