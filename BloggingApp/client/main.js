@@ -16,11 +16,22 @@ Router.route('/blog');
 Router.route('/addNewPost');
 Router.route('/myPosts');
 
+//global helper methods
+//convert date to viewer friendly format
+Template.registerHelper('glbConvertDate', function(date){
+	var options = {
+		    year: "numeric", month: "short",
+		    day: "numeric", hour: "2-digit", minute: "2-digit"
+		};
 
-//helper methods
+  		return date.toLocaleDateString("en-US", options);
+})
+
+
+//template helper methods
 Template.blog.helpers({
+	//posts displayed with newest post on top
 	postList: function() {
-		//posts displayed with newest post on top
 		return Posts.find({},{sort: {created: -1}});
 	},
 
@@ -30,33 +41,13 @@ Template.blog.helpers({
 	  		return true;
 	  	}
 	  	return false;
-		},
-
-	//convert date to viewer friendly format
-	convertDate: function(date){
-	  	var options = {
-		    year: "numeric", month: "short",
-		    day: "numeric", hour: "2-digit", minute: "2-digit"
-		};
-
-  		return date.toLocaleDateString("en-US", options);
-  	}
+		}
 });
 
 Template.myPosts.helpers({
   	getMyPosts: function() {
 	  	//posts displayed with newest post on top
 	  	return Posts.find({userId: Meteor.userId()},{sort: {created: -1}});
-  	},
-
-	//convert date to viewer friendly format
-	convertDate: function(date){
-		var options = {
-			year: "numeric", month: "short",
-			day: "numeric", hour: "2-digit", minute: "2-digit"
-		};
-
-		return date.toLocaleDateString("en-US", options);
   	}
 });
 
