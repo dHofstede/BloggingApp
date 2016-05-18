@@ -1,36 +1,72 @@
 <head>
-  <title>simple</title>
+  <title>Dan Hofstede's Blog Application</title>
 </head>
 
 <body>
-  {{> loginButtons}}
-  {{> blog}}
-  
+<div class="container">
+  </div>
 </body>
 
 <template name="blog">
-<h3>New Post</h3>
-  <form class='add-blog-post'>
-    <input type="text" name="blogTitle" placeholder="Title" />
-    <textarea name="blogText" placeholder="Text" rows="4" cols="50">
-    </textarea>
-    <input type="submit" name="Submit">
-  </form>
-  
-  <h3>Blog Posts</h3>
-  
-  <ul>
-    {{#each postList}}
-      <hr />
+<ul class="nav nav-pills">
+  <li role="presentation" class="active"><a href="/">Home</a></li>
+  <li role="presentation"><a href="/addNewPost">Create New Post</a></li>
+  <li role="presentation"><a href="/myPosts">My Posts</a></li>
+  <li role="presentation"><a href="">{{> loginButtons}}</a></li>
+</ul>
+  <div class="container">
+    <h3>Posts</h3>
+    
+    <ul>
+      {{#each postList}}
+        <hr />
         <h4>{{author}}</h4>
         <h4>{{convertDate created}}</h4>
         <h4>{{title}}</h4>
         <p>{{text}}</p>
-        {{#if isPostOwner userId}}
-          <button class="edit-post">Edit</button>
-          <button class="delete-post">Delete</button>
-        {{/if}}
-    {{/each}}
-  </ul>
-  
+      {{/each}}
+    </ul>
+  </div>
+</template>
+
+<template name="addNewPost">
+<ul class="nav nav-pills">
+  <li role="presentation"><a href="/">Home</a></li>
+  <li role="presentation" class="active"><a href="/addNewPost">Create New Post</a></li>
+  <li role="presentation"><a href="/myPosts">My Posts</a></li>
+  <li role="presentation"><a href="">{{> loginButtons}}</a></li>
+</ul>
+  <div class="container">
+  <h3>New Post</h3>
+  <form class='add-blog-post'>
+    <input type="text" name="blogTitle" placeholder="Blog Title" />
+    <br />
+    <textarea name="blogText" placeholder="Blog Text" rows="4" cols="50"></textarea>
+    <br />
+    <input type="submit" name="Submit">
+  </form>
+  </div>
+</template>
+
+<template name="myPosts">
+<ul class="nav nav-pills">
+  <li role="presentation"><a href="/">Home</a></li>
+  <li role="presentation"><a href="/addNewPost">Create New Post</a></li>
+  <li role="presentation" class="active"><a href="/myPosts">My Posts</a></li>
+  <li role="presentation"><a href="">{{> loginButtons}}</a></li>
+</ul>
+  <div class="container">
+    <h3>Blog Posts</h3>
+    <ul>
+      {{#each getMyPosts}}
+        <hr />
+        <h4>{{author}}</h4>
+        <h4>{{convertDate created}}</h4>
+        <h4>{{title}}</h4>
+        <p>{{text}}</p>
+        <button class="edit-my-post">Edit</button>
+        <button class="delete-my-post">Delete</button> 
+      {{/each}}
+    </ul> 
+  </div>
 </template>
